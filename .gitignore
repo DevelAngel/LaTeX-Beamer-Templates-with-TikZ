@@ -1,4 +1,5 @@
 ## Core latex/pdflatex auxiliary files:
+*.pdf
 *.aux
 *.lof
 *.log
@@ -6,6 +7,8 @@
 *.fls
 *.out
 *.toc
+*._aux
+*._log
 
 ## Intermediate documents:
 *.dvi
@@ -107,3 +110,7 @@ sympy-plots-for-*.tex/
 
 # xindy
 *.xdy
+
+# vim
+*.tex.project.vim
+.*.swp

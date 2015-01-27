@@ -1,0 +1,8 @@
+beamerthemeAngel707/doc/licenses/LICENSE
+beamerthemeAngel707/doc/licenses/manifest-code.txt
+beamerthemeAngel707/beamerthemeAngel707.sty
+beamerthemeAngel707/beamerfontthemeAngel707.sty
+beamerthemeAngel707/beamercolorthemeAngel707.sty
+beamerthemeAngel707/beamerinnerthemeAngel707.sty
+beamerthemeAngel707/beamerouterthemeAngel707.sty
+beamerthemeAngel707/Angel707-example.tex

@@ -1,0 +1,8 @@
+beamerthemeAngel707/doc/licenses/LICENSE
+beamerthemeAngel707/doc/licenses/manifest-code.txt
+beamerthemeAngel707/doc/licenses/manifest-documentation.txt
+beamerthemeAngel707/doc/AUTHORS
+beamerthemeAngel707/doc/README
+beamerthemeAngel707/doc/INSTALL
+beamerthemeAngel707/doc/ChangeLog
+beamerthemeAngel707/doc/TODO
