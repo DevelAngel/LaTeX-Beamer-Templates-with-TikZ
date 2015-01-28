@@ -1,3 +1,6 @@
+# ignore some folders
+beamerthemeXYZ/
+
 ## Core latex/pdflatex auxiliary files:
 *.pdf
 *.aux
