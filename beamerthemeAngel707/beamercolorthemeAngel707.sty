@@ -6,4 +6,57 @@
 % 2. under the GNU Public License.
 %
 % See the file doc/licenses/LICENSE for more details.
+\ProvidesPackage{beamercolorthemeAngel707}[2015/01/16 Angelos Drossos' beamer color style]
 
+\mode<presentation>
+
+%% OWN COLORS
+\definecolor{angel707red}{rgb}{0.627,0,0}
+\definecolor{angel707green}{rgb}{0,0.627,0}
+\definecolor{angel707blue}{rgb}{0.027,0.267,0.584}
+\definecolor{angel707orange}{cmyk}{0,0.6,0.8,0}
+
+%% TEXT
+\setbeamercolor*{text}{fg=black}
+\setbeamercolor*{alerted text}{fg=angel707orange}
+\setbeamercolor*{example text}{fg=angel707green}
+\setbeamercolor*{structure}{fg=angel707blue}
+
+%% BLOCK
+\setbeamercolor*{block title}{fg=white, bg=angel707blue}
+\setbeamercolor*{block body}{fg=black, bg=angel707blue!20}
+\setbeamercolor*{block title alerted}{fg=white, bg=angel707red}
+\setbeamercolor*{block body alerted}{fg=black, bg=angel707red!20}
+\setbeamercolor*{block title alerted}{fg=white, bg=angel707orange}
+\setbeamercolor*{block body alerted}{fg=black, bg=angel707orange!20}
+\setbeamercolor*{block title example}{fg=white, bg=angel707green}
+\setbeamercolor*{block body example}{fg=black, bg=angel707green!20}
+
+%% ITEM
+%\setbeamercolor*{item}{fg=orange}
+
+%% TITLE PAGE
+\setbeamercolor*{title page}{bg=angel707blue!20}
+\setbeamercolor*{title}{parent=structure}
+\setbeamercolor*{subtitle}{parent=structure}
+\setbeamercolor*{author}{parent=structure}
+\setbeamercolor*{institute}{parent=structure}
+\setbeamercolor*{date}{parent=structure}
+
+%% FRAMETITLE
+\setbeamercolor*{frametitle}{parent=structure}
+\setbeamercolor*{framesubtitle}{parent=structure}
+
+%% HEADLINE and FOOTLINE
+\setbeamercolor*{headline}{bg=white}
+\setbeamercolor*{footline}{bg=white}
+\setbeamercolor*{title in head/foot}{parent=structure}
+\setbeamercolor*{author in head/foot}{parent=structure}
+\setbeamercolor*{institute in head/foot}{parent=structure}
+\setbeamercolor*{pages in head/foot}{parent=structure}
+\setbeamercolor*{progressbar in head/foot}{parent=structure}
+\setbeamercolor*{section in head/foot}{parent=structure}
+\setbeamercolor*{subsection in head/foot}{parent=structure}
+
+\mode
+<all>
