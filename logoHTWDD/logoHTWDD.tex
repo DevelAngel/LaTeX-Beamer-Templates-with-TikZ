@@ -1,0 +1,80 @@
+\documentclass{standalone}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\author{Angelos Drossos}
+\title{Logo of University of Applied Sciences Dresden}
+\hypersetup{
+	pdfauthor = {Angelos Drossos},
+	pdftitle = {Logo of University of Applied Sciences Dresden},
+	pdfsubject = {Logo designed with TikZ},
+	pdfkeywords = {LaTeX, TikZ, Logo},
+	pdfcreator = {LaTeX with hyperref package},
+	pdfproducer = {LaTeX}
+	}
+
+\definecolor{htwblack}{named}{black}
+\definecolor{htworange}{RGB}{255,158,28}
+\begin{document}
+\begin{tikzpicture}[auto, scale = 1.0]
+
+	%%
+	%% HTWDD logo as jpg/png had a height of 1012px.
+	%% In LaTeX, H has a height of 1em (normalsize).
+	%%
+	%% converting: px [read from jpg/png version] --> em
+	%% 1012/1012 px == 1.000 em
+	%%  220/1012 px == 0.217 em
+	%%  533/1012 px == 0.527 em
+	%%  708/1012 px == 0.700 em
+	%%  565/1012 px == 0.558 em
+	%%  740/1012 px == 0.731 em
+	%%  268/1012 px == 0.265 em
+	%%   32/1012 px == 0.032 em
+	%%  480/1012 px == 0.474 em
+	%%  800/1012 px == 0.791 em
+	%%  768/1012 px == 0.759 em
+	%% 1106/1012 px == 1.093 em
+	%% 1846/1012 px == 1.824 em
+	%%  800/1012 px == 0.791 em
+	%%  660/1012 px == 0.652 em
+	%%  898/1012 px == 0.887 em
+	%%  238/1012 px == 0.235 em
+	%% 2418/1012 px == 2.389 em
+	%% 1372/1012 px == 1.356 em
+	%% 1540/1012 px == 1.522 em
+	%% 2112/1012 px == 2.087 em
+	%% 
+
+	%% === H ===
+	\begin{scope}
+	\fill[fill=htwblack] (0em,0em) rectangle (0.217em,-1em);
+	\fill[fill=htwblack] (0.217em,-0.527em) rectangle (0.700em,-0.558em); % 220+488=708, 533+32=565
+	\fill[fill=htwblack] (0.700em,0em) rectangle (0.731em,-1em); % 220+488+32=740
+	\end{scope}
+
+	%% === T ===
+	\begin{scope}[xshift = 0.731em] % 740
+	\fill[fill=htwblack] (0em,0em) rectangle (0.265em,-0.032em);
+	\fill[fill=htwblack] (0.265em,0em) rectangle (0.474em,-1em); % 268+212=480
+	\fill[fill=htwblack] (0.759em,0em) rectangle (0.791em,-1em); % 268+212+288=768, 768+32=800
+	\fill[fill=htwblack] (0.791em,0em) rectangle (1.093em,-0.032em); % 800+306=1106
+	\end{scope}
+
+	%% === W ===
+	\begin{scope}[xshift = 1.522em] % 740+800=1540
+	\fill[fill=htwblack] (0em,-1em) -- (0.652em,0em) -- (0.887em,0em) -- (0.238em,-1em) -- cycle; % 660+238=898
+	\end{scope}
+	\begin{scope}[xshift = 2.087em] % 1540+572=2112
+	\fill[fill=htworange] (0em,-1em) -- (0.652em,0em) -- (0.887em,0em) -- (0.238em,-1em) -- cycle; % 660+238=898
+	\end{scope}
+
+	%% === Dresden ===
+	%\begin{scope}
+	%\node[text width = 2.087em, text = htworange, anchor = north west] at (0,-1)
+	%	{\parbox{2.087em}{Dresden}};
+	%\end{scope}
+
+\end{tikzpicture}
+\end{document}
