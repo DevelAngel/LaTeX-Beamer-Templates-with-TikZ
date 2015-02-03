@@ -8,10 +8,11 @@
 % See the file doc/licenses/LICENSE for more details.
 
 
-\documentclass[%
-	english,  % load babel with language english
-	%ngerman, % load babel with language ngerman
-	]{beamer}
+\documentclass[]{beamer}
+\usepackage[%
+	%english,  % load babel with language english
+	ngerman, % load babel with language ngerman
+	]{babel}
 \usepackage{ifluatex}
 \ifluatex
 \usepackage[%
@@ -44,7 +45,7 @@
 %\subtitle{}
 \author[A.~Drossos]{Angelos Drossos}
 \institute[TU]{Technische Universität}
-%\date{} % if no date is specified, today is used
+\date{\today} % if no date is specified, today is used
 \titlegraphic{\includegraphics[height=4cm]{titlegraphic.pdf}}
 \logo{\includegraphics[height=0.8cm]{logo.pdf}}
 \subject{Beamer Templates with TikZ}
