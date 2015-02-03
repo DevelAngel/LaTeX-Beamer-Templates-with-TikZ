@@ -138,7 +138,7 @@
 }
 
 
-%% background of titlepage and other pages.
+%% background of titlepage and other pagenumber.
 \defbeamertemplate*{background}{Angel707}
 {}
 
@@ -154,9 +154,9 @@
 {
 	\tikzmath {
 		coordinate \ctitle;
-		coordinate \cpages;
+		coordinate \cpagenumber;
 		\ctitle = (0.2cm, 0.5*\cfootlinesizey);
-		\cpages = (\cfootlinesizex-0.2cm, \ctitley);
+		\cpagenumber = (\cfootlinesizex-0.2cm, \ctitley);
 		coordinate \cprogressbarpos;
 		int \iframenumber;
 		int \iframetotalnumber;
@@ -207,7 +207,7 @@
 		\usebeamercolor{title in head/foot}
 		\usebeamercolor{author in head/foot}
 		\usebeamercolor{institute in head/foot}
-		\usebeamercolor{pages in head/foot}
+		\usebeamercolor{page number in head/foot}
 		\usebeamercolor[fg]{progressbar in head/foot}
 		%% footline background -- begin
 		\useasboundingbox[fill=footline.bg] (0,0) rectangle (\cfootlinesize);
@@ -221,25 +221,25 @@
 			{\(\blacktriangle\)};
 		%% PAGES
 		\ifnum\iappendixframes>0\relax%
-		\node[anchor=east, text width=1.6cm, align=right, color=pages in head/foot.fg, font=\usebeamerfont{pages in head/foot}]
-			(npages) at (\cpages)
+		\node[anchor=base east, text width=1.6cm, align=right, color=page number in head/foot.fg, font=\usebeamerfont{page number in head/foot}]
+			(npagenumber) at (\cpagenumber)
 			{\appendixname};
 		\else
-		\node[anchor=east, text width=1.6cm, align=right, color=pages in head/foot.fg, font=\usebeamerfont{pages in head/foot}]
-			(npages) at (\cpages)
+		\node[anchor=base east, text width=1.6cm, align=right, color=pagenumber in head/foot.fg, font=\usebeamerfont{pagenumber in head/foot}]
+			(npagenumber) at (\cpagenumber)
 			{\iframenumber~/~\iframetotalnumber};
 		\fi
 		%% TITLE [SHORT]
-		\node[anchor=west, color=title in head/foot.fg, font=\usebeamerfont{title in head/foot}]
+		\node[anchor=base west, color=title in head/foot.fg, font=\usebeamerfont{title in head/foot}]
 			(ntitle) at (\ctitle)
 			{\insertshorttitle};
 		%% INSTITUTE [SHORT]
-		\node[anchor=east, xshift=-2cm, color=institute in head/foot.fg, font=\usebeamerfont{institute in head/foot}]
-			(ninstitute) at (npages.west)
+		\node[anchor=base east, xshift=-2cm, color=institute in head/foot.fg, font=\usebeamerfont{institute in head/foot}]
+			(ninstitute) at (npagenumber.base west)
 			{\insertshortinstitute};
 		%% AUTHOR [SHORT]
-		\node[anchor=center, color=author in head/foot.fg, font=\usebeamerfont{author in head/foot}]
-			(nauthor) at ($(ntitle.east)!0.5!(ninstitute.west)$)
+		\node[anchor=base, color=author in head/foot.fg, font=\usebeamerfont{author in head/foot}]
+			(nauthor) at ($(ntitle.base east)!0.5!(ninstitute.base west)$)
 			{\insertshortauthor};
 		%% footline foreground -- end
 	\end{tikzpicture}
