@@ -1,0 +1,141 @@
+%% This graph has the same order as
+%% in the file 'beamercolorthemedefault.sty' of BEAMER package.
+%% Thus, comparing it with future versions should be done easily.
+\begin{tikzpicture}[
+	nodes={text height=.7em, text depth=.2em, draw=black!20,
+		thick, fill=white, font=\footnotesize},
+	rounded corners, semithick]
+	\graph [tree layout, grow=right, level distance=1cm,
+		sibling sep=.5em, sibling distance=1cm] {
+		%% root nodes
+		"color";%==root
+		"use current";%==empty
+		%% \setbeamercolor{A}{fg=black,bg=white}      ==> "A" -> "color";%root
+		%% \setbeamercolor{B}{}                       ==> "B" -> "use current";%empty
+		%% \setbeamercolor{C}{fg=fg!50!bg}            ==> "C" -> "use current";%empty,nouse,fg=fg!50!bg
+		%% \setbeamercolor{D}{parent=X}               ==> "D" -> "X";%parent
+		%% \setbeamercolor{E}{use=Y,fg=Y.fg}          ==> "E" -> "Y";%use,fg=use.fg
+		%% \setbeamercolor{F}{use=Y,fg=Y.bg}          ==> "F" -> "Y";%use,fg=use.bg
+		%% \setbeamercolor{G}{use=Y,fg=Y.fg!50!bg}    ==> "G" -> "Y";%use,fg=use.fg!50!bg
+		%% \setbeamercolor{H}{use=Y,fg=Y.fg!50!black} ==> "H" -> "Y";%use,fg=use.fg!50!black
+		%% \setbeamercolor{I}{parent=Y,use=Y,fg=white,bg=use.fg} ==> "H" -> "Y";%parent=use,fg=white,bg=use.fg
+		"normal text" -> "color";%root,fg=black,bg=white
+		"alerted text" -> "color";%root,fg=red
+		"example text" -> "color";%root,fg=green!50!black
+		"structure" -> "color";%root,fg=beamer@blendedblue
+		"background canvas" -> "normal text";%parent
+		"background" -> "background canvas";%parent
+		"palette primary" -> "structure";%use,fg=use.fg
+		"palette secondary" -> "structure";%use,fg=use.fg!75!black
+		"palette tertiary" -> "structure";%use,fg=use.fg!50!black
+		"palette quaternary" -> "color";%root,fg=black
+		"palette sidebar primary" -> "normal text";%use,fg=use.fg
+		"palette sidebar secondary" -> "structure";%use,fg=use.fg
+		"palette sidebar tertiary" -> "normal text";%use,fg=use.fg
+		"palette sidebar quaternary" -> "structure";%use,fg=use.fg
+		"math text" -> "use current";%empty
+		"math text inlined" -> "math text";%parent
+		"math text displayed" -> "math text";%parent
+		"normal text in math text" -> "use current";%empty
+		"local structure" -> "structure";%parent
+		"titlelike" -> "structure";%parent
+		"title" -> "titlelike";%parent
+		"title in head/foot" -> "palette quaternary";%parent
+		"title in sidebar" -> "palette sidebar quaternary";%parent
+		"subtitle" -> "title";%parent
+		"author" -> "use current";%empty
+		"author in head/foot" -> "palette primary";%parent
+		"author in sidebar" -> "palette sidebar tertiary";%use,fg=use.fg
+		"institute" -> "use current";%empty
+		"institute in head/foot" -> "palette tertiary";%parent
+		"institute in sidebar" -> "palette sidebar tertiary";%use,fg=use.fg
+		"date" -> "use current";%empty
+		"date in head/foot" -> "palette secondary";%parent
+		"date in sidebar" -> "palette sidebar tertiary";%use,fg=use.fg
+		"titlegraphic" -> "use current";%empty
+		"part name" -> "use current";%empty
+		"part title" -> "titlelike";%parent
+		"section name" -> "use current"; %empty
+		"section title" -> "titlelike";%parent
+		"section in toc" -> "structure";%parent
+		"section in toc shaded" -> "section in toc";%parent
+		"section in head/foot" -> "palette tertiary";%parent
+		"section in sidebar" -> "palette sidebar secondary";%parent
+		"section in sidebar shaded" -> "section in sidebar";%use,fg=use.fg!40!bg
+		"section number projected" -> "item projected";%parent
+		"subsection name" -> "use current"; %empty
+		"subsection title" -> "titlelike";%parent
+		"subsection in toc" -> "use current";%empty
+		"subsection in toc shaded" -> "subsection in toc";%parent
+		"subsection in head/foot" -> "palette secondary";%parent
+		"subsection in sidebar" -> "palette sidebar secondary";%parent
+		"subsection in sidebar shaded" -> "subsection in sidebar";%use,fg=use.fg!40!bg
+		"subsection number projected" -> "subitem projected";%parent
+		"subsubsection in toc" -> "subsection in toc";%parent
+		"subsubsection in toc shaded" -> "subsubsection in toc";%parent
+		"subsubsection in head/foot" -> "subsection in head/foot";%parent
+		"subsubsection in sidebar" -> "subsection in sidebar";%parent
+		"subsubsection in sidebar shaded" -> "subsection in sidebar shaded";%parent
+		"subsubsection number projected" -> "subsubitem projected";%parent
+		"headline" -> "use current";%empty
+		"footline" -> "use current";%empty
+		"sidebar" -> "use current";%empty
+		"sidebar left" -> "sidebar";%parent
+		"sidebar right" -> "sidebar";%parent
+		"logo" -> "palette secondary";%parent
+		"frametitle" -> "titlelike";%parent
+		"framesubtitle" -> "frametitle";%parent
+		"frametitle right" -> "frametitle";%parent
+		"caption" -> "use current";%empty
+		"caption name" -> "structure";%parent
+		"button" -> "local structure";%use,bg=use.fg!50!bg,fg=white
+		"button border" -> "button";%use,fg=use.bg
+		"navigation symbols" -> "structure";%use,fg=use.fg!40!bg
+		"navigation symbols dimmed" -> "structure";%use,fg=use.fg!20!bg
+		"mini frame" -> "section in head/foot";%parent
+		"block body" -> "use current";%empty
+		"block body alerted" -> "use current";%empty
+		"block body example" -> "use current";%empty
+		"block title" -> "structure";%parent
+		"block title alerted" -> "alerted text";%parent
+		"block title example" -> "example text";%parent
+		"item" -> "local structure";%parent
+		"subitem" -> "item";%parent
+		"subsubitem" -> "subitem";%parent
+		"item projected" -> "item";%parent=use,fg=white,bg=use.fg
+		"subitem projected" -> "item projected";%parent
+		"subsubitem projected" -> "subitem projected";%parent
+		"enumerate item" -> "item";%parent
+		"enumerate subitem" -> "subitem";%parent
+		"enumerate subsubitem" -> "subsubitem";%parent
+		"itemize item" -> "item";%parent
+		"itemize subitem" -> "subitem";%parent
+		"itemize subsubitem" -> "subsubitem";%parent
+		"itemize/enumerate body" -> "use current";%empty
+		"itemize/enumerate subbody" -> "use current";%empty
+		"itemize/enumerate subsubbody" -> "use current";%empty
+		"description item" -> "item";%parent
+		"bibliography item" -> "item";%parent
+		"bibliography entry author" -> "structure";%use,fg=use.fg
+		"bibliography entry title" -> "normal text";%use,fg=use.fg
+		"bibliography entry location" -> "structure";%use,fg=use.fg!65!bg
+		"bibliography entry note" -> "structure";%use,fg=use.fg!65!bg
+		"separation line" -> "use current";%empty
+		"upper separation line head" -> "separation line";%parent
+		"middle separation line head" -> "separation line";%parent
+		"lower separation line head" -> "separation line";%parent
+		"upper separation line foot" -> "separation line";%parent
+		"middle separation line foot" -> "separation line";%parent
+		"lower separation line foot" -> "separation line";%parent
+		"abstract" -> "use current";%empty
+		"abstract title" -> "structure";%parent
+		"verse" -> "use current";%empty
+		"quotation" -> "use current";%empty
+		"quote" -> "quotation";%empty
+		"page number in head/foot" -> "use current";%empty,nouse,fg=fg!50!bg
+		"qed symbol" -> "structure";%parent
+		"note page" -> "color";%root,bg=white!90!black,fg=black
+		"note title" -> "color";%root,bg=white!80!black,fg=black
+		"note date" -> "note title";%parent
+		};
+\end{tikzpicture}
