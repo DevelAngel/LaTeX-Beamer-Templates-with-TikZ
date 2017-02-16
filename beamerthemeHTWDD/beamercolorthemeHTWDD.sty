@@ -1,0 +1,111 @@
+% Copyright 2015-2017 by Angelos Drossos <dev.angelos.drossos@openmailbox.org>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/LICENSE.md for more details.
+\ProvidesPackage{beamercolorthemeHTWDD}[2017/02/15 HTWDD beamer color style]
+
+\mode<presentation>
+
+%% OWN COLORS
+\definecolor{htwddblack}{named}{black}
+\definecolor{htwddred}{rgb}{0.627,0,0}
+\definecolor{htwddgreen}{rgb}{0,0.627,0}
+\definecolor{htwddblue}{rgb}{0.027,0.267,0.584}
+\definecolor{htwddorange}{RGB}{255,158,28}
+
+%% See 'BEAMER appearance cheat sheet'
+%% structure was included in GLOBAL DEFINITIONS,
+%% because it is a very important color for other elements
+
+%% STRUCTURE OF THE PRESENTATION
+%% - GLOBAL DEFINITIONS
+\setbeamercolor{normal text}{fg=black, bg=black!40}
+\setbeamercolor{titlelike}{fg=black,bg=black!40}
+%\setbeamercolor{separation line}{}
+%\setbeamercolor{fine separation line}{}
+\setbeamercolor{structure}{fg=htwddblack}
+%% - COLOR PALETTES
+%%   By default, the palette colors do not have a background
+%%   and the foreground ranges from structure.fg to black.
+\setbeamercolor{palette primary}{use=structure,fg=black,bg=structure.fg!20!white}
+\setbeamercolor{palette secondary}{use=structure,fg=black,bg=structure.fg!20!white}
+\setbeamercolor{palette tertiary}{use=structure,fg=black,bg=structure.fg!20!white}
+\setbeamercolor{palette quaternary}{use=structure,fg=black,bg=structure.fg!20!white}
+%\setbeamercolor{palette sidebar primary}{}
+%\setbeamercolor{palette sidebar secondary}{}
+%\setbeamercolor{palette sidebar tertiary}{}
+%\setbeamercolor{palette sidebar quaternary}{}
+%% - TITLE PAGE
+%% - PART, SECTION, SUBSECTION PAGES
+%% - TABLE OF CONTENTS
+%% - BIBLIOGRAPHY
+%% - NOTE PAGE
+
+%% STRUCTURE OF A FRAME
+%% - BACKGROUND
+%% - HEADLINES AND FOOTLINES
+%% - SIDEBAR
+%% - NAVIGATION BARS
+%% - NAVIGATION SYMBOLS
+%% - LOGO
+
+%% ELEMENTS OF A FRAME
+%% - FRAME TITLE
+%% - ABSTRACT
+%% - HYPERLINKS AND BUTTONS
+%% - LISTS
+%% - HIGHLIGHTING
+%% - BLOCK ENVIRONMENTS
+%% - THEOREM ENVIRONMENTS
+%% - FIGURES AND TABLES
+%% - VERSE, QUOTATIONS AND QUOTES
+%% - FOOTNOTES
+%% - MATHEMATICS
+
+%% TEXT
+\setbeamercolor{alerted text}{fg=htwddorange}
+\setbeamercolor{example text}{fg=htwddgreen}
+
+
+%% BLOCK
+\setbeamercolor{block title}{fg=white, bg=htwddblue}
+\setbeamercolor{block body}{fg=black, bg=htwddblue!20}
+\setbeamercolor{block title alerted}{fg=white, bg=htwddred}
+\setbeamercolor{block body alerted}{fg=black, bg=htwddred!20}
+\setbeamercolor{block title alerted}{fg=white, bg=htwddorange}
+\setbeamercolor{block body alerted}{fg=black, bg=htwddorange!20}
+\setbeamercolor{block title example}{fg=white, bg=htwddgreen}
+\setbeamercolor{block body example}{fg=black, bg=htwddgreen!20}
+
+%% ITEM
+%\setbeamercolor{item}{fg=orange}
+
+%% TITLE PAGE
+\setbeamercolor{title page}{bg=htwddblue!20}
+\setbeamercolor{title}{parent=structure}
+\setbeamercolor{subtitle}{parent=structure}
+\setbeamercolor{author}{parent=structure}
+\setbeamercolor{institute}{parent=structure}
+\setbeamercolor{date}{parent=structure}
+
+%% FRAMETITLE
+\setbeamercolor{frametitle}{parent=structure}
+\setbeamercolor{framesubtitle}{parent=structure}
+
+%% HEADLINE and FOOTLINE
+\setbeamercolor{headline}{bg=white}
+\setbeamercolor{footline}{bg=white}
+\setbeamercolor{title in head/foot}{parent=structure}
+\setbeamercolor{author in head/foot}{parent=structure}
+\setbeamercolor{institute in head/foot}{parent=structure}
+\setbeamercolor{page number in head/foot}{parent=structure}
+\setbeamercolor{progressbar in head/foot}{parent=structure}
+\setbeamercolor{section in head/foot}{parent=structure}
+\setbeamercolor{subsection in head/foot}{parent=structure}
+
+\mode
+<all>

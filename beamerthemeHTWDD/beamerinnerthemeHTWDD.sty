@@ -1,0 +1,116 @@
+% Copyright 2015-2017 by Angelos Drossos <dev.angelos.drossos@openmailbox.org>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/LICENSE.md for more details.
+\ProvidesPackage{beamerinnerthemeHTWDD}[2017/02/15 HTWDD beamer inner style]
+
+\mode<presentation>
+
+
+
+
+%% Requirements
+\RequirePackage{tikz}
+\usetikzlibrary{math}
+\usetikzlibrary{calc}
+
+%% constant math calculations
+\tikzmath {
+	% background size
+	coordinate \ctitlepagesize;
+	\ctitlepagesize = (\the\paperwidth, \the\paperheight);
+}
+
+\setbeamertemplate{items}[square]
+\setbeamertemplate{sections/subsections in toc}[square]
+
+%% text style of titlepage.
+%%   colors for 'title', 'author' and 'date'
+%%   must be declared in beamercolortheme
+\defbeamertemplate*{title page}{HTWDD}
+{
+	\hspace*{-\beamer@leftmargin}%<-- this % is important
+	\begin{tikzpicture}
+		%% include used colors (fg/bg)
+		\usebeamercolor{title page}
+		\usebeamercolor{title}
+		\usebeamercolor{author}
+		\usebeamercolor{institute}
+		\usebeamercolor{date}
+		%% title page background -- begin
+		\useasboundingbox[fill=title page.bg] (0,0) rectangle (\ctitlepagesize);
+		%% title page background -- end
+		%% title page foreground -- begin
+		%% LOGO
+		%\node[anchor=south west]
+		%	(nlogo) at (0.01*\ctitlepagesizex, 0.02*\ctitlepagesizey)
+		%	{\insertlogo};
+		\ifx\inserttitlegraphic\@empty
+		{
+			%% TITLE
+			\node[anchor=north, text width=0.9*\ctitlepagesizex, align=center, color=title.fg, font=\usebeamerfont{title}]
+				(ntitle) at (0.5*\ctitlepagesizex, 0.7*\ctitlepagesizey)
+				{\usebeamerfont{title}\inserttitle};
+			%% AUTHOR
+			\node[anchor=north, text width=0.9*\ctitlepagesizex, align=center, color=author.fg, font=\usebeamerfont{author}, yshift=-1ex]
+				(nauthor) at (ntitle.south)
+				{\usebeamerfont{author}\insertauthor};
+			%% INSTITUTE
+			\node[anchor=north, text width=0.9*\ctitlepagesizex, align=center, color=institute.fg, font=\usebeamerfont{institute}, yshift=-1ex]
+				(ninstitute) at (nauthor.south)
+				{\usebeamerfont{institute}\insertinstitute};
+			%% DATE
+			\node[anchor=north, text width=0.9*\ctitlepagesizex, align=center, color=date.fg, font=\usebeamerfont{date}, yshift=-1ex]
+				(ndate) at (ninstitute.south)
+				{\usebeamerfont{date}\insertdate};
+		}
+		\else
+		{
+			%% TITLE GRAPHIC
+			\node[anchor=south]
+				(ngraphic) at (0.5*\ctitlepagesizex, 0.05*\ctitlepagesizey)
+				{\inserttitlegraphic};
+			%% TITLE
+			\node[anchor=north, text width=0.9*\ctitlepagesizex, align=center, color=title.fg, font=\usebeamerfont{title}]
+				(ntitle) at (0.5*\ctitlepagesizex, 0.9*\ctitlepagesizey)
+				{\usebeamerfont{title}\inserttitle};
+			%% AUTHOR
+			\node[anchor=north, text width=0.9*\ctitlepagesizex, align=center, color=author.fg, font=\usebeamerfont{author}, yshift=-2ex]
+				(nauthor) at (ntitle.south)
+				{\usebeamerfont{author}\insertauthor};
+			%% INSTITUTE
+			\node[anchor=north, text width=0.9*\ctitlepagesizex, align=center, color=institute.fg, font=\usebeamerfont{institute}, yshift=-1ex]
+				(ninstitute) at (nauthor.south)
+				{\usebeamerfont{institute}\insertinstitute};
+			%% DATE
+			\node[anchor=north, text width=0.9*\ctitlepagesizex, align=center, color=date.fg, font=\usebeamerfont{date}, yshift=-1ex]
+				(ndate) at (ninstitute.south)
+				{\usebeamerfont{date}\insertdate};
+		}
+		\fi
+		%% title page foreground -- end
+	\end{tikzpicture}
+}
+
+
+%% ???
+\defbeamertemplate*{part page}{HTWDD}
+{}
+
+
+%% ???
+\defbeamertemplate*{section page}{HTWDD}
+{}
+
+
+%% ???
+\defbeamertemplate*{subsection page}{HTWDD}
+{}
+
+
+\mode
+<all>

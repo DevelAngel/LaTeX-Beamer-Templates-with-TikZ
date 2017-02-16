@@ -1,0 +1,304 @@
+% Copyright 2015-2017 by Angelos Drossos <dev.angelos.drossos@openmailbox.org>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/LICENSE.md for more details.
+\ProvidesPackage{beamerouterthemeHTWDD}[2017/02/15 HTWDD beamer outer style]
+
+% An outer theme specifies how the following elements are rendered:
+%  - The head- and footline
+%  - The sidebars
+%  - The logo
+%  - The frame title
+% (- Background, which is above of Background canvas)
+% (- Background canvas)
+
+\mode<presentation>
+
+%%
+%% default layout:
+%%
+%% |--------------------------------------------------------|
+%% |               headline                                 |
+%% |--------------------------------------------------------|
+%% | side- | text   |  frametitle          | text   | side- |
+%% | bar   | margin |----------------------| margin | bar   |
+%% |       |        |                      |        |       |
+%% | left  | left   |   frame              | right  | right |
+%% |       |        |   contents           |        |       |
+%% |       |        |                      |        |       |
+%% |       |        |                      |        |       |
+%% |       |        |                      |        |       |
+%% |--------------------------------------------------------|
+%% |               footline                                 |
+%% |--------------------------------------------------------|
+%%
+
+%%
+%% HTWDD layout:
+%%  - no headline,
+%%  - no sidebars
+%%  - greater frametitle (text margin is used)
+%%
+%% |--------------------------------------------------------|
+%% |--------------------------------------------------------|
+%% ||           frametitle                                 ||
+%% ||--------|------------------------------------|--------||
+%% ||        |                                    |        ||
+%% || text   |  frame                             | text   ||
+%% || margin |  contents                          | margin ||
+%% ||        |                                    |        ||
+%% || left   |                                    | right  ||
+%% ||        |                                    |        ||
+%% ||        |                                    |        ||
+%% |--------------------------------------------------------|
+%% |               footline                                 |
+%% |--------------------------------------------------------|
+%%
+
+
+\def\insertpresentationendframe{\inserttotalframenumber}
+\makeatletter
+\g@addto@macro{\appendix}{\immediate\write\@auxout{\string\@writefile{nav}{\noexpand\headcommand{\noexpand\def\noexpand\insertpresentationendframe{\the\c@framenumber}}}}}
+\makeatother
+
+%% Requirements
+\RequirePackage{tikz}
+\usetikzlibrary{math}
+\usetikzlibrary{calc}
+
+
+%% constant math calculations
+\tikzmath {
+	%% background size
+	coordinate \cbackgroundsize;
+	\cbackgroundsize = (\the\paperwidth, \the\paperheight);
+	%% headline size
+	coordinate \cheadlinesize;
+	\cheadlinesize = (\cbackgroundsizex, 0cm);
+	%% footline size
+	coordinate \cfootlinesize;
+	\cfootlinesize = (\cbackgroundsizex, 2em);
+	%% sidebar left size
+	coordinate \csidebarleftsize;
+	\csidebarleftsize = (0, \cbackgroundsizey);
+	%% sidebar right size
+	coordinate \csidebarrightsize;
+	\csidebarrightsize = (0, \cbackgroundsizey);
+	%% text margin left size
+	coordinate \ctextmarginleftsize;
+	\ctextmarginleftsize = (1cm, 0);
+	%% text margin right size
+	coordinate \ctextmarginrightsize;
+	\ctextmarginrightsize = (1cm, 0);
+	%% frametitle size and skip:
+	%%    skip is needed to make use of text margin area
+	coordinate \cframetitleleftskip;
+	coordinate \cframetitlerightskip;
+	coordinate \cframetitlesize;
+	\cframetitleleftskip  = (-\ctextmarginleftsizex, 0);
+	\cframetitlerightskip = (-\ctextmarginrightsizex, \cframetitleleftskipy);
+	\cframetitlesize = (\cbackgroundsizex-\csidebarleftsizex-\csidebarrightsizex-\ctextmarginleftsizex-\ctextmarginrightsizex-\cframetitleleftskipx-\cframetitlerightskipx, 1.2cm);
+	%% progressbar settings
+	coordinate \cprogressbarsep;
+	coordinate \cprogressbarsize;
+	\cprogressbarsep = (1.5ex, 0);
+	\cprogressbarsize = (\cfootlinesizex-\cprogressbarsepx*2, \cfootlinesizey);
+}
+
+\setbeamersize{
+	sidebar width left=\csidebarleftsizex,
+	sidebar width right=\csidebarrightsizex
+}
+
+\setbeamersize{
+	text margin left=\ctextmarginleftsizex,
+	text margin right=\ctextmarginrightsizex
+}
+
+\setbeamersize{
+	%description width=0pt
+	%description width of={Text}
+}
+
+%\setbeamersize{
+%	mini frame size=0.14cm,
+%	mini frame offset=.03cm
+%}
+
+
+\defbeamertemplate*{background canvas}{HTWDD}
+{
+	\begin{tikzpicture}
+		\useasboundingbox[fill=white] (0,0) rectangle (\cbackgroundsize);
+	\end{tikzpicture}
+}
+
+
+%% background of titlepage and other pagenumber.
+\defbeamertemplate*{background}{HTWDD}
+{}
+
+
+
+%% text style of headline (including headline background)
+\defbeamertemplate*{headline}{HTWDD}
+{}
+
+
+%% text style of footline (including footline background)
+\defbeamertemplate*{footline}{HTWDD}
+{
+	\tikzmath {
+		coordinate \ctitle;
+		coordinate \cpagenumber;
+		\ctitle = (0.2cm, 0.5*\cfootlinesizey);
+		\cpagenumber = (\cfootlinesizex-0.2cm, \ctitley);
+		coordinate \cprogressbarpos;
+		int \iframenumber;
+		int \iframetotalnumber;
+		int \iprogressbarpartial;
+		int \iprogressbartotal;
+		int \iappendixframes;
+		%% progressbar position in percent (e.g. presentationendframe=4):
+		%%   frame1: 0 / 1 = 0    (title page frame)
+		%%   frame2: 0 / 2 = 0    (presentation frames)
+		%%   frame3: 1 / 2 = 0.5
+		%%   frame4: 2 / 2 = 1
+		%%   frame5:         1    (appendix frames)
+		%%   frame6:         1
+		if \insertframenumber>\insertpresentationendframe then
+		{
+			%% appendix frames (presentationendframe+1,...)
+			\iappendixframes = 1;
+			\iframenumber = \insertpresentationendframe;
+			\iframetotalnumber = \insertpresentationendframe;
+			\iprogressbarpartial = 1;
+			\iprogressbartotal = 1;
+			\cprogressbarpos = (\cprogressbarsizex+\cprogressbarsepx, \cprogressbarsizey);
+		}
+		else
+		{
+			%% presentation frames and title page frame
+			\iappendixframes = 0;
+			\iframenumber = \insertframenumber;
+			\iframetotalnumber = \insertpresentationendframe;
+			if \iframenumber>1 then
+			{
+				%% presentation frames (frame2,...,presentationendframe)
+				\iprogressbarpartial = \insertframenumber - 2;
+				\iprogressbartotal = \insertpresentationendframe - 2;
+			}
+			else
+			{
+				%% title page frame (frame1)
+				\iprogressbarpartial = 0;
+				\iprogressbartotal = 1;
+			};
+			\cprogressbarpos = (\iprogressbarpartial/\iprogressbartotal*\cprogressbarsizex+\cprogressbarsepx, \cprogressbarsizey);
+		};
+	}%<-- this % is important
+	\begin{tikzpicture}
+		%% include used colors (fg/bg)
+		\usebeamercolor{footline}
+		\usebeamercolor{title in head/foot}
+		\usebeamercolor{author in head/foot}
+		\usebeamercolor{institute in head/foot}
+		\usebeamercolor[fg]{page number in head/foot}
+		\usebeamercolor[fg]{progressbar in head/foot}
+		%% footline background -- begin
+		\useasboundingbox[fill=footline.bg] (0,0) rectangle (\cfootlinesize);
+		%% footline background -- end
+		%% footline foreground -- begin
+		%% PROGRESSBAR
+		\draw[line width=1pt, outer sep=0pt, inner sep=0pt, color=progressbar in head/foot.fg]
+			(\cprogressbarsepx, \cprogressbarposy) -- (\cfootlinesizex-\cprogressbarsepx, \cprogressbarposy);
+		\node[anchor=north, outer sep=0pt, inner sep=1pt, color=progressbar in head/foot.fg]
+			(nprogressbar) at (\cprogressbarpos)
+			{\(\blacktriangle\)};
+		%% PAGES
+		\ifnum\iappendixframes>0\relax%
+		\node[anchor=base east, text width=1.6cm, align=right, color=page number in head/foot.fg, font=\usebeamerfont{page number in head/foot}]
+			(npagenumber) at (\cpagenumber)
+			{\appendixname};
+		\else
+		\node[anchor=base east, text width=1.6cm, align=right, color=page number in head/foot.fg, font=\usebeamerfont{pagenumber in head/foot}]
+			(npagenumber) at (\cpagenumber)
+			{\iframenumber~/~\iframetotalnumber};
+		\fi
+		%% TITLE [SHORT]
+		\node[anchor=base west, color=title in head/foot.fg, font=\usebeamerfont{title in head/foot}]
+			(ntitle) at (\ctitle)
+			{\insertshorttitle};
+		%% INSTITUTE [SHORT]
+		\node[anchor=base east, xshift=-2cm, color=institute in head/foot.fg, font=\usebeamerfont{institute in head/foot}]
+			(ninstitute) at (npagenumber.base west)
+			{\insertshortinstitute};
+		%% AUTHOR [SHORT]
+		\node[anchor=base, color=author in head/foot.fg, font=\usebeamerfont{author in head/foot}]
+			(nauthor) at ($(ntitle.base east)!0.5!(ninstitute.base west)$)
+			{\insertshortauthor};
+		%% footline foreground -- end
+	\end{tikzpicture}
+}
+
+
+\defbeamertemplate*{sidebar left}{HTWDD}
+{}
+
+
+%% Note: In theme Default, the logo is placed in the right sidebar.
+%%       But the logo is also displayed when the width of right sidebar is zero!
+%%       Thus, an empty sidebar right template must be defined to remove the logo.
+\defbeamertemplate*{sidebar right}{HTWDD}
+{}
+
+
+%% text style of frametitle (including frametitle background)
+\defbeamertemplate*{frametitle}{HTWDD}
+{
+	\hspace*{\cframetitleleftskipx}%<-- this % is important
+	\vspace*{\cframetitleleftskipy}%<-- this % is important
+	\begin{tikzpicture}
+		%% frametitle background -- begin
+		\useasboundingbox[fill=white] (0, 0) rectangle (\cframetitlesize);
+		\draw[line width=1pt, outer sep=0pt, inner sep=0pt] (\cprogressbarsepx, 0) -- (\cframetitlesizex-\cprogressbarsepx, 0);
+		%\fill[color=orange]          (0, 0)                      rectangle (0.2*\cframetitlesizex, \cframetitlesizey);
+		%\fill[color=blue!50!cyan!80] (0.21*\cframetitlesizex, 0) rectangle (\cframetitlesizex, \cframetitlesizey);
+		%% frametitle background -- end
+		%% frametitle foreground -- begin
+		%% FRAMETITLE and FRAMESUBTITLE
+		\ifx\insertframesubtitle\@empty
+		{
+			\node[anchor=west, font=\usebeamerfont{frametitle}]
+				at (\cprogressbarsepx, 0.6*\cframetitlesizey)
+				{\insertframetitle};
+		}
+		\else
+		{
+			\node[anchor=west, font=\usebeamerfont{frametitle}]
+				at (\cprogressbarsepx, 0.6*\cframetitlesizey)
+				{\insertframetitle};
+			\node[anchor=west, font=\usebeamerfont{framesubtitle}]
+				at (\cprogressbarsepx, 0.25*\cframetitlesizey)
+				{\insertframesubtitle};
+		}
+		\fi
+		%% LOGO
+		\node[anchor=north east, outer sep=0pt, inner sep=0pt]
+			at (\cframetitlesizex-\cprogressbarsepx, 0.8*\cframetitlesizey)
+			{\insertlogo};
+		%% frametitle foreground -- end
+	\end{tikzpicture}
+}
+
+\defbeamertemplate*{frametitle continuation}{HTWDD}{\insertcontinuationcountroman}
+
+%\defbeamertemplate*{note page}{HTWDD}
+%{}
+
+\mode
+<all>

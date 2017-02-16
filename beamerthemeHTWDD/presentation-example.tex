@@ -1,0 +1,251 @@
+% Copyright 2015-2017 by Angelos Drossos <dev.angelos.drossos@openmailbox.org>
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/LICENSE.md for more details.
+
+% LaTeX compiler support: PDFLaTeX and LuaLaTeX
+\RequirePackage{ifluatex}
+
+% ---{{{ hotfix when ``pgfsys-luatex.def'' not found
+% TexLive 2016 and MiKTeX
+\ifluatex
+\RequirePackage{luatex85}
+\def\pgfsysdriver{pgfsys-pdftex.def}
+\fi
+% ---}}}
+
+\documentclass[]{beamer}
+\usepackage[%
+	%english,  % load babel with language english
+	ngerman, % load babel with language ngerman
+	]{babel}
+% TODO: Is it better to set font settings in beamerfontthemeHTWDD ?
+% one can change the font here
+\ifluatex % --- packages needed when lualatex is used
+\usepackage[%
+	%math,    % load math packages
+	]{fontspec}
+\defaultfontfeatures{%
+	Ligatures=TeX
+	}
+\setmainfont{Linux Libertine O}     % main font
+\setsansfont{Linux Biolinum O}      % sans font (for sections)
+\setmonofont{Linux LibertineMono O} % mono font (for listings)
+\usepackage[%
+	protrusion=true, %
+	expansion,       %
+	]{microtype}
+\else % --- packages needed when pdflatex is used
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[mono=true]{libertine} % main/sans/mono font (Libertine, Biolinum, LibertineMono)
+\usepackage[%
+	protrusion=true, %
+	expansion,       %
+	]{microtype}
+\fi % --- end of lualatex/pdflatex specified packages
+
+% we want to use the HTWDD beamer theme
+\usetheme{HTWDD}
+
+\title[My Presentation]{My HTWDD presentation -- This is an example presentation}
+%\subtitle{}
+\author[A.~Drossos]{Angelos~Drossos}
+\institute[HTWDD]{University of Applied Sciences Dresden}
+\date{\today} % if no date is specified, today is used
+\titlegraphic{\includegraphics[height=4cm]{titlegraphic.pdf}} % your titlegraphic as pdf or similar
+\logo{\includegraphics[height=0.8cm]{logo.pdf}} % the HTWDD logo
+\subject{Beamer Templates with TikZ} % presentation subject
+\keywords{LaTeX, Beamer, TikZ} % keywords describing the presentation
+
+\begin{document}
+
+%
+% title page
+%
+
+\frame[plain]{\titlepage}
+%\frame{\titlepage}
+
+%
+% outline (without subsections)
+%
+\section*{Outline}
+
+\begin{frame}{Outline}
+	\tableofcontents[hideallsubsections]
+\end{frame}
+
+%
+% section: introduction
+%
+\section{Introduction}
+
+\begin{frame}{\secname{}}
+	\tableofcontents[currentsection,currentsubsection,hideothersubsections]
+\end{frame}
+
+\begin{frame}{I am a frame title -- and that is good so}
+Hallo, I am a text inside a frame.
+
+\vfill
+
+\begin{itemize}
+\item and I am a text inside an itemize environment
+\item and a second text
+\item and more\ldots
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{I am a frame title -- and that is good so}{And I am a subtitle.. bah!}
+Hallo, I am a text inside a frame.
+
+\vfill
+
+\begin{itemize}
+\item and I am a text inside an itemize environment
+\item and a second text
+\item and more\ldots
+\end{itemize}
+\end{frame}
+
+
+%
+% section: ...
+%
+\section{Bla Bli Blubb Blocks}
+
+\begin{frame}{\secname{}}
+	\tableofcontents[currentsection,currentsubsection,hideothersubsections]
+\end{frame}
+
+\subsection{Blocks without headers}
+
+\begin{frame}{Blocks}{without headers}
+\begin{block}{}
+\begin{itemize}
+\item and I am a text inside an itemize environment
+\item and a second text
+\item and more\ldots
+\end{itemize}
+\end{block}
+
+\vfill
+
+\begin{exampleblock}{}
+\begin{itemize}
+\item and I am a text inside an itemize environment
+\item and a second text
+\item and more\ldots
+\end{itemize}
+\end{exampleblock}
+
+\vfill
+
+\begin{alertblock}{}
+\begin{itemize}
+\item and I am a text inside an itemize environment
+\item and a second text
+\item and more\ldots
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+
+\subsection{Blocks with headers}
+
+\begin{frame}{Blocks}{with headers}
+\begin{block}{a fact}
+\begin{itemize}
+\item and I am a text inside an itemize environment
+\item and a second text
+\end{itemize}
+\end{block}
+
+\vfill
+
+\begin{exampleblock}{an example}
+\begin{itemize}
+\item and I am a text inside an itemize environment
+\item and a second text
+\end{itemize}
+\end{exampleblock}
+
+\vfill
+
+\begin{alertblock}{An Alert!!}
+\begin{itemize}
+\item and I am a text inside an itemize environment
+\item and a second text
+\end{itemize}
+\end{alertblock}
+\end{frame}
+
+
+%
+% section: ...
+%
+\section{Overlays}
+
+\begin{frame}{\secname{}}
+	\tableofcontents[currentsection,currentsubsection,hideothersubsections]
+\end{frame}
+
+\begin{frame}{I am a frame title -- and that is good so}{And I am a subtitle.. bah!}
+Hallo, I am a text inside a frame.
+
+\vfill
+
+\begin{block}{Overlays}
+\begin{itemize}
+\item<+-> and I am a text inside an itemize environment
+\item<+-> and a second text
+\item<+-> and more\ldots
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+%
+% APPENDIX (if needed)
+%
+\appendix
+
+% Variant A: empty frame with text 'appendix'
+\begin{frame}[plain]{\appendixname{} (Variant A)}
+	\centering
+	\usebeamerfont{title}%
+	\usebeamercolor[fg]{structure}%
+	\appendixname
+\end{frame}
+
+% Variant B: table of content of appendix
+\begin{frame}{\appendixname{} (Variant B)}
+	\tableofcontents[hideallsubsections]
+\end{frame}
+
+%
+% appendix section: ...
+%
+\section{A1}
+
+\begin{frame}{A CDEF}
+	A text inside an appendix frame.
+\end{frame}
+
+%
+% appendix section: ...
+%
+\section{B1}
+
+\begin{frame}{B GHIJK}
+	Another text inside an appendix frame.
+\end{frame}
+
+
+\end{document}
